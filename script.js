@@ -1,44 +1,25 @@
-const number = document.getElementById("number");
-const convertBtn = document.getElementById("convert-btn");
-const output = document.getElementById("output");
+const messageInput = document.getElementById("message-input");
+const result = document.getElementById("result");
+const checkMessageButton = document.getElementById("check-message-btn");
 
-const checkValue = () => {
-  if (number.value === "") {
-    output.innerText = "Please enter a valid number"
-  } else if (parseInt(number.value) < 0) {
-    output.innerText = "Please enter a number greater than or equal to 1"
-  } else if (parseInt(number.value) > 3999) {
-    output.innerText = "Please enter a number less than or equal to 3999"
-  } else {
-    output.innerText = convertToRoman();
+const helpRegex = /please help|assist me/i;
+const dollarRegex = /[0-9]+ (?:hundred|thousand|million|billion)? dollars/i;
+const freeRegex = /(?:^|\s)fr[e3][e3] m[o0]n[e3]y(?:$|\s)/i;
+const stockRegex = /(?:^|\s)[s5][t7][o0][c{[(]k [a@4]l[e3]r[t7](?:$|\s)/i;
+const dearRegex = /(?:^|\s)d[e3][a4@]r fr[i1|][e3]nd(?:$|\s)/i;
+
+const denyList = [helpRegex, dollarRegex, freeRegex, stockRegex, dearRegex];
+
+const isSpam = (msg) => denyList.some((regex) => regex.test(msg));
+
+checkMessageButton.addEventListener("click", () => {
+  if (messageInput.value === "") {
+    alert("Please enter a message.");
+    return;
   }
-};
 
-const convertToRoman = () => {
-    const romanValues = {
-        M: 1000,
-        CM: 900,
-        D: 500,
-        CD: 400,
-        C: 100,
-        XC: 90,
-        L: 50,
-        XL: 40,
-        X: 10,
-        IX: 9,
-        V: 5,
-        IV: 4,
-        I: 1
-    };
-    let roman = '';
-    let input = parseInt(number.value);
-    for (let key in romanValues) {
-        while (input >= romanValues[key]) {
-            roman += key;
-            input -= romanValues[key];
-        }
-    }
-    return roman;
-}
-
-convertBtn.addEventListener("click", checkValue);
+  result.textContent = isSpam(messageInput.value)
+    ? "Oh no! This looks like a spam message."
+    : "This message does not seem to contain any spam.";
+  messageInput.value = "";
+});

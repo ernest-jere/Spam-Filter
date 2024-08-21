@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <mata charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roman Numeral Converter</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Learn Regular Expressions by Building a Spam Filter</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <div id="container">
-      <h1>Roman Numeral Converter</h1>
-      <h2>Enter A Number:</h2>
-      <input id="number" type="number" name="number">
-      <button type="button" id="convert-btn">Convert</button>
-      <div id="output"></div>
-    </div>
-    <script src="script.js"></script>
+    <header class="main-text">
+      <h1 class="title">Is this Spam?</h1>
+      <p class="description">
+        Check if the phrase is spam or not.
+      </p>
+    </header>
+
+    <main>
+      <label class="message-label" for="message-input">Enter Message: </label>
+      <textarea
+        placeholder="Enter message here"
+        value=""
+        type="text"
+        name="message"
+        id="message-input"
+        rows="10"
+        cols="40"
+      ></textarea>
+      <button class="btn" id="check-message-btn" type="button">
+        Check message
+      </button>
+      <p id="result"></p>
+    </main>
+
+    <footer class="footer">&copy; freeCodeCamp Project By Ernest Jere</footer>
+    <script src="./script.js"></script>
   </body>
 </html>
